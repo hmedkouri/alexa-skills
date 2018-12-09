@@ -37,7 +37,7 @@ subprojects {
   apply(plugin="org.kordamp.gradle.stats")
   apply(plugin="com.github.ben-manes.versions")
   apply(from="../gradle/publishing.gradle")
-  apply(from="../gradle/code-coverage.gradle")
+  apply(from="../gradle/code-coverage.gradle.kts")
   apply(from="../gradle/code-quality.gradle")
 
 

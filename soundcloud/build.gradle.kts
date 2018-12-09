@@ -5,66 +5,71 @@ val gradleWrapperVersion: String by project
 val kotlinVersion: String by project
 
 plugins {
-    val kotlinVersion = "1.3.10"
-    kotlin("jvm") version kotlinVersion
+  val kotlinVersion = "1.3.10"
+  kotlin("jvm") version kotlinVersion
 }
 
 dependencies {
-    implementation(kotlin("stdlib", kotlinVersion))
-    implementation(kotlin("stdlib-jdk7", kotlinVersion))
-    implementation(kotlin("stdlib-jdk8", kotlinVersion))
-    implementation(kotlin("reflect", kotlinVersion))
+  implementation(kotlin("stdlib", kotlinVersion))
+  implementation(kotlin("stdlib-jdk7", kotlinVersion))
+  implementation(kotlin("stdlib-jdk8", kotlinVersion))
+  implementation(kotlin("reflect", kotlinVersion))
 
-    testImplementation(kotlin("test", kotlinVersion))
-    testImplementation(kotlin("test-junit5", kotlinVersion))
-}
+  implementation(group = "com.amazon.alexa", name = "alexa-skills-kit", version = "1.3.0")
+  implementation(group = "com.amazonaws", name = "aws-lambda-java-core", version = "1.1.0")
+  runtimeOnly(group = "com.amazonaws", name = "aws-lambda-java-log4j", version = "1.0.0")
+  implementation(group = "com.amazonaws", name = "aws-java-sdk-dynamodb", version = "1.11.125")
+  implementation(group = "com.google.code.gson", name = "gson", version = "2.8.0")
+  implementation(group = "com.squareup.okhttp3", name = "okhttp", version = "3.7.0")
 
-kotlin {
-    experimental.coroutines = Coroutines.ENABLE
+  testImplementation(kotlin("test", kotlinVersion))
+  testImplementation(kotlin("test-junit5", kotlinVersion))
 }
 
 tasks {
-    withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
-    }
+  withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
+  }
 
-    withType<Test> {
-        testLogging.showStandardStreams = true
-    }
+  withType<Test> {
+    testLogging.showStandardStreams = true
+  }
 
-    withType<Jar> {
-        /*manifest {
-            attributes["Main-Class"] = application.mainClassName
-        }
-        from(configurations.runtime.map { if (it.isDirectory) it else zipTree(it) })*/
-        finalizedBy(sourcesJar)
+  withType<Jar> {
+    /*manifest {
+        attributes["Main-Class"] = application.mainClassName
     }
+    from(configurations.runtime.map { if (it.isDirectory) it else zipTree(it) })*/
+    finalizedBy(sourcesJar)
+  }
 
-    withType<GradleBuild> {
-        finalizedBy("publishToMavenLocal")
-    }
+  withType<GradleBuild> {
+    finalizedBy("publishToMavenLocal")
+  }
 
-    withType<Wrapper> {
-        gradleVersion = gradleWrapperVersion
-        distributionType = Wrapper.DistributionType.ALL
-    }
+  withType<Wrapper> {
+    gradleVersion = gradleWrapperVersion
+    distributionType = Wrapper.DistributionType.ALL
+  }
 
 }
 
-/*gradle.taskGraph.whenReady {
-    def createIfNotExists = { File dir ->
-        if (!dir.exists()) {
-            dir.mkdirs()
-        }
-    }
+val fatJar = task("fatJar", type = Jar::class) {
 
-    String sourceSetName = project.plugins.hasPlugin("groovy") ? "groovy" : "java"
-    sourceSets.main[sourceSetName].srcDirs.each(createIfNotExists)
-    sourceSets.test[sourceSetName].srcDirs.each(createIfNotExists)
-    sourceSets.main.resources.srcDirs.each(createIfNotExists)
-    sourceSets.test.resources.srcDirs.each(createIfNotExists)
+  baseName = project.name + "-fat"
+  version = "${project.version}"
+
+  from(configurations["runtime"].files.map { if (it.isDirectory) it else zipTree(it) })
+  with(tasks["jar"] as CopySpec)
+
 }
 
-wrapper {
-    gradleVersion = '5.0'
-}*/
+// Run the standard task build with the task called "fatJar".
+tasks {
+  "assemble" {
+    dependsOn(fatJar)
+  }
+  "build" {
+    dependsOn(fatJar)
+  }
+}
