@@ -1,4 +1,3 @@
-apply plugin: 'jdepend'
 apply plugin: 'checkstyle'
 apply plugin: 'com.github.hierynomus.license'
 
@@ -35,14 +34,6 @@ if (project.hasProperty('findBugsEnabled') && project.findBugsEnabled.toBoolean(
             html.enabled = true
         }
     }
-}
-
-
-jdepend {
-    toolVersion = '2.9.1'
-    sourceSets = [sourceSets.main]
-    ignoreFailures = true
-    reportsDir = file("$project.buildDir/reports/jdepend")
 }
 
 license {
