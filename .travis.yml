@@ -1,5 +1,16 @@
 language: java
+
+branches:
+  only:
+    - master
+    - /^release.*$/
+
+jdk:
+  - openjdk8
+
+before_install:
+  - chmod +x gradlew
+
 script: ./gradlew clean build jacocoTestReport
-jdk: openjdk8
-env: TERM=dumb
+
 after_success: ./gradlew coveralls
