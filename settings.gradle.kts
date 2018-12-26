@@ -9,3 +9,4 @@
 
 rootProject.name = "alexa-skills"
 include("soundcloud")
+include("trivia")
