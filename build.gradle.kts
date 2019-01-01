@@ -39,6 +39,4 @@ subprojects {
   apply(from="../gradle/publishing.gradle")
   apply(from="../gradle/code-coverage.gradle.kts")
   apply(from="../gradle/code-quality.gradle")
-
-
 }
