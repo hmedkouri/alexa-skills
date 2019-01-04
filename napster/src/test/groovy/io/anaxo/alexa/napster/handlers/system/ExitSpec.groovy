@@ -1,11 +1,11 @@
-package io.anaxo.alexa.napster.handlers
-
+package io.anaxo.alexa.napster.handlers.system
 
 import com.amazon.ask.model.Response
+import io.anaxo.alexa.napster.handlers.system.Exit
 import spock.lang.Specification
 import spock.lang.Subject
 
-import static io.anaxo.alexa.napster.Fixture.*
+import static io.anaxo.alexa.napster.Fixture.handlerInputForIntent
 
 class ExitSpec extends Specification {
 

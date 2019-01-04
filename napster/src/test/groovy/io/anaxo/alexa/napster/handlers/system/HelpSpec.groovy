@@ -1,7 +1,8 @@
-package io.anaxo.alexa.napster.handlers
+package io.anaxo.alexa.napster.handlers.system
 
 
 import com.amazon.ask.model.Response
+import io.anaxo.alexa.napster.handlers.system.Help
 import spock.lang.Specification
 import spock.lang.Subject
 

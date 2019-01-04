@@ -1,4 +1,4 @@
-package io.anaxo.alexa.napster.handlers
+package io.anaxo.alexa.napster.handlers.system
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput
 import com.amazon.ask.dispatcher.request.handler.RequestHandler
