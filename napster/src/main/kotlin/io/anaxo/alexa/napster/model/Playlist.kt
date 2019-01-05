@@ -1,24 +1,51 @@
 package io.anaxo.alexa.napster.model
 
-class Playlist {
+import java.util.*
+
+
+
+class Playlist(var items: List<String> = listOf()) {
+
+    constructor(vararg values: String) : this() {
+        items = values.asList()
+    }
+
     fun clear() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        items = listOf()
     }
 
-    fun hasItem(currentToken: String?): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    fun add(entry : String) {
+        items += listOf(entry)
     }
 
-    fun hasNext(currentToken: String?): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    fun hasItem(token: String): Boolean {
+        return find(token).isPresent
     }
 
-    fun get(currentToken: String?): Any {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    private fun find(token: String): Optional<String> {
+        return items.stream().filter { it == token }.findAny()
     }
 
-    fun nextOf(currentToken: String?): String? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    fun hasNext(token: String): Boolean {
+        return findNextOf(token).isPresent
     }
 
+    fun nextOf(token: String): String? {
+        return findNextOf(token)
+                .orElseThrow{ Exception("MESSAGEKEY_LAST_SONG") }
+    }
+
+    private fun findNextOf(token: String): Optional<String> {
+        return Optional.of(get(token))
+                .map { items.indexOf(token) }
+                .map { index -> if (index >= 0) index + 1 else null }
+                .map { index -> if (index != null && index < items.size) items[index] else null }
+    }
+
+    fun get(token: String): Any {
+        return find(token)
+                .orElseThrow {
+                    NoSuchElementException("No playlist entry with $token found.")
+                }
+    }
 }

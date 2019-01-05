@@ -5,7 +5,9 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler
 import com.amazon.ask.model.Response
 import com.amazon.ask.request.Predicates
 import java.util.*
+import javax.inject.Singleton
 
+@Singleton
 class Help: RequestHandler {
 
     val helpText : String = "This skill provides you control of Napster. What would you like to do next?"

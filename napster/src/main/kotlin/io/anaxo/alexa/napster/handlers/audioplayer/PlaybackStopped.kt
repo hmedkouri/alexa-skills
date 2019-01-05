@@ -6,8 +6,9 @@ import com.amazon.ask.model.Response
 import com.amazon.ask.model.interfaces.audioplayer.PlaybackStoppedRequest
 import com.amazon.ask.request.Predicates
 import java.util.*
+import javax.inject.Singleton
 
-
+@Singleton
 class PlaybackStopped : RequestHandler {
 
     override fun canHandle(input: HandlerInput): Boolean {

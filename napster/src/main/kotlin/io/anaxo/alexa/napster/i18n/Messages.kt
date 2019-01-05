@@ -2,7 +2,9 @@ package io.anaxo.alexa.napster.i18n
 
 import java.text.MessageFormat
 import java.util.*
+import javax.inject.Singleton
 
+@Singleton
 class Messages {
 
     companion object {

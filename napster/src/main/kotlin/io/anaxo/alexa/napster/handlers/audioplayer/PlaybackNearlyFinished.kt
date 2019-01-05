@@ -10,13 +10,14 @@ import io.anaxo.alexa.napster.model.DeviceSession
 import io.anaxo.alexa.napster.repository.DeviceSessionRepository
 import org.slf4j.LoggerFactory
 import java.util.*
+import javax.inject.Singleton
 
-
+@Singleton
 class PlaybackNearlyFinished(deviceSessionRepository: DeviceSessionRepository) : AbstractDeviceSession(deviceSessionRepository) {
 
     private val LOGGER = LoggerFactory.getLogger(PlaybackNearlyFinished::class.java)
 
-    fun canHandle(input: HandlerInput): Boolean {
+    override fun canHandle(input: HandlerInput): Boolean {
         return input.matches(Predicates.requestType(PlaybackNearlyFinishedRequest::class.java))
     }
 

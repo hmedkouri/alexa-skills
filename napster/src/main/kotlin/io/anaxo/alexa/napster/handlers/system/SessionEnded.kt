@@ -6,7 +6,9 @@ import com.amazon.ask.model.Response
 import com.amazon.ask.model.SessionEndedRequest
 import com.amazon.ask.request.Predicates.requestType
 import java.util.*
+import javax.inject.Singleton
 
+@Singleton
 class SessionEnded : RequestHandler {
 
     override fun canHandle(input: HandlerInput?): Boolean {

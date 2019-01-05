@@ -5,7 +5,7 @@ val gradleWrapperVersion: String by project
 val kotlinVersion: String by project
 
 plugins {
-  val kotlinVersion = "1.3.10"
+  val kotlinVersion = "1.3.11"
   kotlin("jvm") version kotlinVersion
 }
 
@@ -40,7 +40,6 @@ tasks {
         attributes["Main-Class"] = application.mainClassName
     }
     from(configurations.runtime.map { if (it.isDirectory) it else zipTree(it) })*/
-    finalizedBy(sourcesJar)
   }
 
   withType<GradleBuild> {

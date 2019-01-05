@@ -20,6 +20,10 @@ plugins {
   id("com.github.johnrengelman.shadow") version "4.0.2"
 }
 
+allOpen {
+  annotation("io.micronaut.aop.Around")
+}
+
 dependencyManagement {
   imports {
     mavenBom("io.micronaut:micronaut-bom:1.0.2")
@@ -40,6 +44,7 @@ dependencies {
 
   /** micronaut */
   annotationProcessor("io.micronaut:micronaut-inject-java")
+  implementation("io.micronaut:micronaut-validation")
   implementation("io.micronaut:micronaut-http-client")
   implementation("io.micronaut:micronaut-http-server-netty")
   compile("io.micronaut:micronaut-inject")
@@ -56,9 +61,11 @@ dependencies {
   kaptTest("io.micronaut:micronaut-inject-java")
   testImplementation("io.micronaut:micronaut-inject-java")
   testImplementation("io.micronaut:micronaut-inject-groovy")
+  testImplementation("io.micronaut.test:micronaut-test-spock:1.0.1")
   testImplementation("org.spockframework:spock-core:1.2-groovy-2.5")
   testImplementation( "cglib:cglib-nodep:3.2.10")
   testImplementation("org.objenesis:objenesis:3.0.1")
+  testImplementation("de.jodamob.kotlin:kotlin-runner-spock:0.3.1")
 }
 
 tasks {
@@ -83,11 +90,6 @@ tasks {
 
   withType<GradleBuild> {
     finalizedBy("publishToMavenLocal")
-  }
-
-  withType<Wrapper> {
-    gradleVersion = gradleWrapperVersion
-    distributionType = Wrapper.DistributionType.ALL
   }
 
   withType<JavaExec> {

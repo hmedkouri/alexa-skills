@@ -7,8 +7,9 @@ import com.amazon.ask.model.Response
 import com.amazon.ask.model.interfaces.audioplayer.PlayBehavior
 import com.amazon.ask.request.Predicates.requestType
 import java.util.*
+import javax.inject.Singleton
 
-
+@Singleton
 class Launch : RequestHandler {
 
     val music : String = "https://freemusicdownloads.world/wp-content/uploads/2017/05/Justin-Bieber-Sorry-PURPOSE-The-Movement.mp3"

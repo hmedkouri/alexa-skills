@@ -6,16 +6,17 @@ import com.amazon.ask.model.interfaces.audioplayer.PlaybackFailedRequest
 import com.amazon.ask.request.Predicates
 import io.anaxo.alexa.napster.handlers.AbstractDeviceSession
 import io.anaxo.alexa.napster.model.DeviceSession
-import io.anaxo.alexa.napster.repository.DeviceSessionRepository
+import io.anaxo.alexa.napster.repository.DeviceSessionOperations
 import org.slf4j.LoggerFactory
 import java.util.*
+import javax.inject.Singleton
 
-
-class PlaybackFailed(deviceSessionRepository: DeviceSessionRepository) : AbstractDeviceSession(deviceSessionRepository) {
+@Singleton
+class PlaybackFailed(deviceSessionRepository: DeviceSessionOperations) : AbstractDeviceSession(deviceSessionRepository) {
 
     private val LOGGER = LoggerFactory.getLogger(PlaybackFailed::class.java)
 
-    fun canHandle(input: HandlerInput): Boolean {
+    override fun canHandle(input: HandlerInput): Boolean {
         return input.matches(Predicates.requestType(PlaybackFailedRequest::class.java))
     }
 

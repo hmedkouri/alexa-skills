@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.gradle.dsl.Coroutines
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
-val gradleWrapperVersion: String by project
 val kotlinVersion: String by project
 val springBootVersion: String by project
 
@@ -63,12 +62,7 @@ tasks {
   withType<GradleBuild> {
     finalizedBy("publishToMavenLocal")
   }
-
-  withType<Wrapper> {
-    gradleVersion = gradleWrapperVersion
-    distributionType = Wrapper.DistributionType.ALL
-  }
-
+  
   withType<JavaExec> {
     application {
       mainClassName = "io.anaxo.alexa.trivia.AlexSpringBootWebApplicationKt"

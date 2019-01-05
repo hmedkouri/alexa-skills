@@ -5,8 +5,9 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput
 import com.amazon.ask.model.Response
 import io.anaxo.alexa.napster.i18n.Messages
 import java.util.*
+import javax.inject.Singleton
 
-
+@Singleton
 class NapsterException(val messages: Messages) : ExceptionHandler {
 
     override fun canHandle(handlerInput: HandlerInput, e: Throwable): Boolean {

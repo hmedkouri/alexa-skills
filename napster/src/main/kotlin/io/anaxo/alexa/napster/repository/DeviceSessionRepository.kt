@@ -3,14 +3,16 @@ package io.anaxo.alexa.napster.repository
 import com.amazon.ask.dispatcher.request.handler.HandlerInput
 import io.anaxo.alexa.napster.model.DeviceSession
 import io.anaxo.alexa.napster.utils.SpeechletRequestUtil
+import javax.inject.Singleton
 
-open class DeviceSessionRepository : AbstractAttributesRepository<DeviceSession>("deviceSession", AbstractAttributesRepository.PERSISTENT()) {
+@Singleton
+class DeviceSessionRepository : AbstractAttributesRepository<DeviceSession>("deviceSession", AbstractAttributesRepository.PERSISTENT()), DeviceSessionOperations {
 
-    fun getDeviceSession(input: HandlerInput): DeviceSession {
-        return getOrDefault(input) { i: HandlerInput -> DeviceSession(deviceId = SpeechletRequestUtil.getDeviceId(i.getRequestEnvelope())) }
+    override fun getDeviceSession(input: HandlerInput): DeviceSession {
+        return getOrDefault(input) { i: HandlerInput -> DeviceSession(deviceId = SpeechletRequestUtil.getDeviceId(i.requestEnvelope)) }
     }
 
-    fun saveDeviceSession(deviceSession: DeviceSession, input: HandlerInput): DeviceSession? {
+    override fun saveDeviceSession(deviceSession: DeviceSession, input: HandlerInput): DeviceSession? {
         return put(deviceSession, input)
     }
 }

@@ -6,12 +6,15 @@ import org.mapdb.DBMaker
 
 class DbFactories private constructor() {
 
-    fun file(fileName: String): DbFactory {
-        return FileDbFactory(fileName)
-    }
+    companion object {
 
-    fun mem(): DbFactory {
-        return MemDbFactory()
+        fun file(fileName: String): DbFactory {
+            return FileDbFactory(fileName)
+        }
+
+        fun mem(): DbFactory {
+            return MemDbFactory()
+        }
     }
 
     private class FileDbFactory(private val fileName: String) : DbFactory {
