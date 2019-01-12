@@ -1,0 +1,12 @@
+version: "3.1"
+
+services:
+  nginx:
+    image: nginx:1.15-alpine
+    container_name: nginx
+    ports:
+      - 9090:9090
+    volumes:
+      - ./nginx/conf/:/etc/nginx/conf.d/
+      - ./nginx/html:/var/www/alexa-napster
+

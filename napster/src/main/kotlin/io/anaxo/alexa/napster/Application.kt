@@ -7,7 +7,7 @@ object Application {
     @JvmStatic
     fun main(args: Array<String>) {
         Micronaut.build()
-                //.packages("io.anaxo.alexa.napster")
+                .packages("io.anaxo.alexa.napster")
                 .mainClass(Application.javaClass)
                 .start()
     }

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Alexa Cloud Music for Napster by Anaxo.io</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+
+    <script type="text/javascript">
+        function redirectToNapster(ev) {
+            ev.preventDefault();
+            // Redirects to /sc/connect/do keeping all request parameters
+            document.location.href = 'do' + document.location.search;
+        }
+    </script>
+
+    <style>
+        .centered-button {
+            margin: 0 auto;
+            display: block;
+        }
+
+        h2 {
+            font-size: 25px;
+        }
+
+        .spacer {
+            height: 10em;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h1 class="page-header">
+                Alexa - Napster
+            </h1>
+            <h2>English</h2>
+            <p>
+                To use this skill, you have to connect it with Napster.
+            </p>
+            <form onsubmit="redirectToNapster(event)">
+                <button type="submit" class="btn btn-success centered-button">Connect with Napster</button>
+            </form>
+            <p/>
+            <p>
+                The Napster skill is provided by <a href="https://anaxo.io/" target="_blank">Anaxo Ltd</a>.
+                You can read our <a href="https://anaxo.io/alexa-privacy-policy/" target="_blank">privacy policy here</a>.
+            </p>
+        </div>
+    </div>
+    <div class="spacer"></div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <p>
+                <a href="https://anaxo.io/impressum" target="_blank">Imprint</a>
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
